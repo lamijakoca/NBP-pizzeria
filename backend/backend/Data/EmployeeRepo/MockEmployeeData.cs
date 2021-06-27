@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace backend.Data.EmployeeRepo
 {
@@ -12,22 +13,24 @@ namespace backend.Data.EmployeeRepo
         {
             databaseContext = context;
         }
-        public Employee AddEmployee(Employee employee)
+        public async Task<bool> AddEmployee(Employee employee)
+        {
+            await databaseContext.Employees.AddAsync(employee);
+            databaseContext.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteEmployee(Employee employee)
         {
             throw new System.NotImplementedException();
         }
 
-        public void DeleteEmployee(Employee employee)
+        public bool EditEmployee(Employee employee)
         {
             throw new System.NotImplementedException();
         }
 
-        public Employee EditEmployee(Employee employee)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Employee GetEmployee(long Id)
+        public Task<Employee> GetEmployee(long Id)
         {
             throw new System.NotImplementedException();
         }

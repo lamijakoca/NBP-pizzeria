@@ -8,11 +8,11 @@ namespace backend.Data.EmployeeRepo
 {
     public interface IEmployeeData
     {
-        List<Employee> GetEmployees();
+        public List<Employee> GetEmployees();
 
-        Employee GetEmployee(long Id);
-        Employee AddEmployee(Employee employee);
-        void DeleteEmployee(Employee employee);
-        Employee EditEmployee(Employee employee);
+        public Task<Employee> GetEmployee(long Id);
+        public Task<bool> AddEmployee(Employee employee);
+        public bool DeleteEmployee(Employee employee);
+        public bool EditEmployee(Employee employee);
     }
 }
