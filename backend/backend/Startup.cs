@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +44,7 @@ namespace backend
             });
             services.AddScoped<IUnitOfWork, MockUnitOfWork>();
             services.AddScoped<IEmployeeData, MockEmployeeData>();
+            services.AddScoped<ICustomerData, MockCustomerData>();
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();

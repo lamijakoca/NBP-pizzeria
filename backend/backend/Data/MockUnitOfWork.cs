@@ -1,4 +1,5 @@
-﻿using backend.Data.EmployeeRepo;
+﻿using backend.Data.CustomerRepo;
+using backend.Data.EmployeeRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,12 @@ namespace backend.Data
     {
         private readonly DatabaseContext _context;
         public IEmployeeData IEmployee { get; set; }
-
-        public MockUnitOfWork(DatabaseContext context, IEmployeeData employeeData)
+        public ICustomerData ICustomer { get; set; }
+        public MockUnitOfWork(DatabaseContext context, IEmployeeData employeeData, ICustomerData customerData)
         {
             _context = context;
             IEmployee = employeeData;
+            ICustomer = customerData;
         }
         public async Task<bool> Complete()
         {

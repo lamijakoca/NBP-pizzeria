@@ -1,4 +1,5 @@
-﻿using backend.Data.EmployeeRepo;
+﻿using backend.Data.CustomerRepo;
+using backend.Data.EmployeeRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace backend.Data
     public interface IUnitOfWork
     {
         public IEmployeeData IEmployee { get; set; }
+        public ICustomerData ICustomer { get; set; }
         Task<bool> Complete();
     }
 }
