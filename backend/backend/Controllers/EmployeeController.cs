@@ -42,7 +42,7 @@ namespace backend.Controllers
                 return Ok(employee);
             }
 
-            return NotFound(new { Message = $"Employee with id: {id} not found" });
+            return NotFound($"Employee with id: {id} not found" );
         }
 
         [HttpPost]
@@ -59,6 +59,41 @@ namespace backend.Controllers
             }
 
             return BadRequest("Invalid info");
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateEmployee([FromRoute] long id, [FromBody] AddEmployeeDTO employeeDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid info");
+            }
+
+            var oldOne = _unitOfWork.IEmployee.GetEmployee(id);
+            if(oldOne == null)
+            {
+                return NotFound("Employee with this id not found");
+            }
+            _mapper.Map<AddEmployeeDTO, Employee>(employeeDTO, oldOne);
+
+            await _unitOfWork.Complete();
+            return Ok("Successfully updated!");
+        }
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteEmployee([FromRoute] long id)
+        {
+            var employee =  _unitOfWork.IEmployee.GetEmployee(id);
+            if (employee == null)
+            {
+                return NotFound($"Employee with id: {id} not found");
+            }
+            _unitOfWork.IEmployee.DeleteEmployee(employee);
+            await _unitOfWork.Complete();
+
+            return Ok("Successfully deleted!");
         }
 
     }

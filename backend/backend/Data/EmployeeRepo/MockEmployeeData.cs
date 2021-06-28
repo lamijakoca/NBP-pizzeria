@@ -24,14 +24,12 @@ namespace backend.Data.EmployeeRepo
         public bool DeleteEmployee(Employee employee)
         {
             databaseContext.Employees.Remove(employee);
-            databaseContext.SaveChanges();
             return true;
         }
 
         public bool EditEmployee(Employee employee)
         {
             databaseContext.Employees.Update(employee);
-            databaseContext.SaveChanges();
             return true;
         }
 
