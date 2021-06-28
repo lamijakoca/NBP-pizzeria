@@ -70,3 +70,5 @@ D:\Code\NBP\backend\backend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard
 D:\Code\NBP\backend\backend\obj\Debug\netcoreapp3.1\backend.csproj.CopyComplete
 D:\Code\NBP\backend\backend\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\Code\NBP\backend\backend\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\Code\NBP\backend\backend\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Code\NBP\backend\backend\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

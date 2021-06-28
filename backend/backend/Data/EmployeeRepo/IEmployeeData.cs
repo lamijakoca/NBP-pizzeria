@@ -8,7 +8,7 @@ namespace backend.Data.EmployeeRepo
 {
     public interface IEmployeeData
     {
-        public List<Employee> GetEmployees();
+        public Task<List<Employee>> GetEmployees();
 
         public Task<Employee> GetEmployee(long Id);
         public Task<bool> AddEmployee(Employee employee);

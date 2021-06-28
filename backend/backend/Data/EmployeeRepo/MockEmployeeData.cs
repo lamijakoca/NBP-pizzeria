@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,22 +23,26 @@ namespace backend.Data.EmployeeRepo
 
         public bool DeleteEmployee(Employee employee)
         {
-            throw new System.NotImplementedException();
+            databaseContext.Employees.Remove(employee);
+            databaseContext.SaveChanges();
+            return true;
         }
 
         public bool EditEmployee(Employee employee)
         {
-            throw new System.NotImplementedException();
+            databaseContext.Employees.Update(employee);
+            databaseContext.SaveChanges();
+            return true;
         }
 
-        public Task<Employee> GetEmployee(long Id)
+        public async Task<Employee> GetEmployee(long Id)
         {
-            throw new System.NotImplementedException();
+            return await databaseContext.Employees.FindAsync(Id);
         }
 
-        public List<Employee> GetEmployees()
+        public async Task<List<Employee>> GetEmployees()
         {
-            return databaseContext.Employees.ToList();
+            return await databaseContext.Employees.ToListAsync();
         }
     }
 }

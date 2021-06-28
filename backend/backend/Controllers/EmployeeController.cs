@@ -1,4 +1,7 @@
-﻿using backend.Data.EmployeeRepo;
+﻿using AutoMapper;
+using backend.Data;
+using backend.Data.EmployeeRepo;
+using backend.DTO;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,32 +11,25 @@ using System.Threading.Tasks;
 
 namespace backend.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private IEmployeeData employeeData;
-        public EmployeeController(IEmployeeData employee)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        public EmployeeController(IUnitOfWork unitOfWork , IMapper mapper)
         {
-            employeeData = employee;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult GetEmployees()
+        public async Task <IActionResult> GetAllEmployees()
         {
-            return Ok(employeeData.GetEmployees());
+            var employees = await _unitOfWork.IEmployee.GetEmployees();
+
+            return Ok(employees);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Employee employee)
-        {
-            if (ModelState.IsValid)
-            {
-                await employeeData.AddEmployee(employee);
-                return Ok("Uspesno registrovano u bazi");
-            }
-            else
-                return BadRequest("Proveri unete podatke, molim te");
-        }
     }
 }

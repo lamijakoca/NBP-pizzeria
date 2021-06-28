@@ -20,8 +20,11 @@ namespace backend.Models
 
         [Required]
         [MinLength(8)]
+        [MaxLength(32)]
         public string Password { get; set; }
         public int NumOfPizzas { get; set; }
+        
+        [Required]
         public string Type { get; set; }
     }
 }
