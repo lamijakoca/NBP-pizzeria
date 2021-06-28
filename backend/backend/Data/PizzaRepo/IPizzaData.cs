@@ -9,9 +9,9 @@ namespace backend.Data.PizzaRepo
     public interface IPizzaData
     {
         public Task<List<Pizza>> GetPizzas();
-        public Task<Pizza> GetPizza();
+        public Task<Pizza> GetPizza(long id);
         public Task<bool> AddPizza(Pizza pizza);
-        public bool DeletePizza();
-        public bool UpdatePizza();
+        public bool DeletePizza(Pizza pizza);
+        public bool UpdatePizza(Pizza pizza);
     }
 }

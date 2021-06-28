@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,37 @@ namespace backend.Data.PizzaRepo
 {
     public class MockPizzaData : IPizzaData
     {
-        public Task<bool> AddPizza(Pizza pizza)
+        private readonly DatabaseContext databaseContext;
+        public MockPizzaData(DatabaseContext context)
         {
-            throw new NotImplementedException();
+            databaseContext = context;
+        }
+        public async Task<bool> AddPizza(Pizza pizza)
+        {
+            await databaseContext.Pizzas.AddAsync(pizza);
+            return true;
         }
 
-        public bool DeletePizza()
+        public bool DeletePizza(Pizza pizza)
         {
-            throw new NotImplementedException();
+            databaseContext.Pizzas.Remove(pizza);
+            return true;
         }
 
-        public Task<Pizza> GetPizza()
+        public async Task<Pizza> GetPizza(long id)
         {
-            throw new NotImplementedException();
+            return await databaseContext.Pizzas.FindAsync(id);
         }
 
-        public Task<List<Pizza>> GetPizzas()
+        public async Task<List<Pizza>> GetPizzas()
         {
-            throw new NotImplementedException();
+            return await databaseContext.Pizzas.ToListAsync();
         }
 
-        public bool UpdatePizza()
+        public bool UpdatePizza(Pizza pizza)
         {
-            throw new NotImplementedException();
+            databaseContext.Pizzas.Update(pizza);
+            return true;
         }
     }
 }

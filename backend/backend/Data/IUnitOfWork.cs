@@ -1,5 +1,6 @@
 ﻿using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
+using backend.Data.PizzaRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace backend.Data
     {
         public IEmployeeData IEmployee { get; set; }
         public ICustomerData ICustomer { get; set; }
+        public IPizzaData IPizza { get; set; }
         Task<bool> Complete();
     }
 }
