@@ -31,5 +31,35 @@ namespace backend.Controllers
             return Ok(employees);
         }
 
+        [HttpGet]
+        [Route ("{id}")]
+        public IActionResult GetById([FromRoute] long id)
+        {
+            var employee = _unitOfWork.IEmployee.GetEmployee(id);
+
+            if (employee != null)
+            {
+                return Ok(employee);
+            }
+
+            return NotFound(new { Message = $"Employee with id: {id} not found" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostEmployee([FromBody] AddEmployeeDTO employeeDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var added = _mapper.Map<Employee>(employeeDTO);
+
+                await _unitOfWork.IEmployee.AddEmployee(added);
+                await _unitOfWork.Complete();
+
+                return Ok(added);
+            }
+
+            return BadRequest("Invalid info");
+        }
+
     }
 }

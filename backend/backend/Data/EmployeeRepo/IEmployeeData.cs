@@ -10,7 +10,7 @@ namespace backend.Data.EmployeeRepo
     {
         public Task<List<Employee>> GetEmployees();
 
-        public Task<Employee> GetEmployee(long Id);
+        public Employee GetEmployee(long Id);
         public Task<bool> AddEmployee(Employee employee);
         public bool DeleteEmployee(Employee employee);
         public bool EditEmployee(Employee employee);

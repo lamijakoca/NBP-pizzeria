@@ -35,9 +35,9 @@ namespace backend.Data.EmployeeRepo
             return true;
         }
 
-        public async Task<Employee> GetEmployee(long Id)
+        public Employee GetEmployee(long id)
         {
-            return await databaseContext.Employees.FindAsync(Id);
+            return databaseContext.Employees.SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<List<Employee>> GetEmployees()
