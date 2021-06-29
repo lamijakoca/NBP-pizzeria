@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.Data.AuthRepo;
 using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
 using backend.Data.Ingredients;
@@ -49,9 +50,30 @@ namespace backend
             services.AddScoped<ICustomerData, MockCustomerData>();
             services.AddScoped<IPizzaData, MockPizzaData>();
             services.AddScoped<IIngredients, MockIngredientsData>();
+            services.AddScoped<IAuthData, MockAuthData>();
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();
+            var key = "SomethinUnusual andqwnf8392bgf8293bgbvwenvign32";
+            services.AddScoped<IAuthData, MockAuthData>();
+
+            _ = services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

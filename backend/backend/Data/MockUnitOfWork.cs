@@ -1,4 +1,5 @@
-﻿using backend.Data.CustomerRepo;
+﻿using backend.Data.AuthRepo;
+using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
 using backend.Data.Ingredients;
 using backend.Data.PizzaRepo;
@@ -16,18 +17,21 @@ namespace backend.Data
         public ICustomerData ICustomer { get; set; }
         public IPizzaData IPizza { get; set; }
         public IIngredients IIngredient { get; set; }
+        public IAuthData IAuth { get; set; }
         public MockUnitOfWork(
             DatabaseContext context, 
             IEmployeeData employeeData, 
             ICustomerData customerData, 
             IPizzaData pizzaData,
-            IIngredients ingredients)
+            IIngredients ingredients,
+            IAuthData authData)
         {
             _context = context;
             IEmployee = employeeData;
             ICustomer = customerData;
             IPizza = pizzaData;
             IIngredient = ingredients;
+            IAuth = authData;
         }
         public async Task<bool> Complete()
         {
