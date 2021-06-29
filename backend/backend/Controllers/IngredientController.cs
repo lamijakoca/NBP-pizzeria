@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using backend.Data;
+using backend.DTO;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,15 +29,64 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("{name}")]
-        public async Task<IActionResult> GetIngredientById([FromRoute] string name)
+        [Route("{id}")]
+        public async Task<IActionResult> GetIngredientById([FromRoute] long id)
         {
-            var ingredient = await unitOfWork.IIngredient.GetIngredient(name);
+            var ingredient = await unitOfWork.IIngredient.GetIngredient(id);
             if (ingredient == null)
             {
-                return NotFound($"Ingredient with name: {name} not found.");
+                return NotFound($"Ingredient with id: {id} not found.");
             }
             return Ok(ingredient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddIngredient([FromBody] IngredientDTO ingredientDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var added = mapper.Map<Ingredient>(ingredientDTO);
+
+                await unitOfWork.IIngredient.AddIngredient(added);
+                await unitOfWork.Complete();
+
+                return Ok("Successfully inserted!");
+            }
+            return BadRequest("Invalid info");
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteByName([FromRoute] long id)
+        {
+            var thisOne = await unitOfWork.IIngredient.GetIngredient(id);
+            if (thisOne == null)
+            {
+                return NotFound($"Ingredient with id {id} not found");
+            }
+            unitOfWork.IIngredient.DeleteIngredient(thisOne);
+            await unitOfWork.Complete();
+
+            return Ok("Successfully deleted!");
+        }
+
+        [HttpPut]
+        [Route ("{id}")]
+        public async Task<IActionResult> UpdateIngredient([FromRoute] long id, [FromBody] IngredientDTO ingredientDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid info");
+            }
+            var oldOne = await unitOfWork.IIngredient.GetIngredient(id);
+            if (oldOne == null)
+            {
+                return NotFound($"There is no Ingredient with name: {id}");
+            }
+            mapper.Map<IngredientDTO, Ingredient>(ingredientDTO, oldOne);
+
+            await unitOfWork.Complete();
+            return Ok("Successfully updated!");
         }
     }
 }
