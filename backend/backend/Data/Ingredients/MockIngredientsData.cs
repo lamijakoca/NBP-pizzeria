@@ -37,9 +37,9 @@ namespace backend.Data.Ingredients
             return await databaseContext.Ingredients.ToListAsync();
         }
 
-        public async Task<Ingredient> GetIngredient(string name)
+        public async Task<Ingredient> GetIngredient(long id)
         {
-            return await databaseContext.Ingredients.FindAsync(name);
+            return await databaseContext.Ingredients.FindAsync(id);
         }
     }
 }
