@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
+using backend.Data.Ingredients;
 using backend.Data.PizzaRepo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,7 @@ namespace backend
             services.AddScoped<IEmployeeData, MockEmployeeData>();
             services.AddScoped<ICustomerData, MockCustomerData>();
             services.AddScoped<IPizzaData, MockPizzaData>();
+            services.AddScoped<IIngredients, MockIngredientsData>();
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();

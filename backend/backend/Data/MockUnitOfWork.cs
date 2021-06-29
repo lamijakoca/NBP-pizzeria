@@ -1,5 +1,6 @@
 ﻿using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
+using backend.Data.Ingredients;
 using backend.Data.PizzaRepo;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,19 @@ namespace backend.Data
         public IEmployeeData IEmployee { get; set; }
         public ICustomerData ICustomer { get; set; }
         public IPizzaData IPizza { get; set; }
-        public MockUnitOfWork(DatabaseContext context, IEmployeeData employeeData, ICustomerData customerData, IPizzaData pizzaData)
+        public IIngredients IIngredient { get; set; }
+        public MockUnitOfWork(
+            DatabaseContext context, 
+            IEmployeeData employeeData, 
+            ICustomerData customerData, 
+            IPizzaData pizzaData,
+            IIngredients ingredients)
         {
             _context = context;
             IEmployee = employeeData;
             ICustomer = customerData;
             IPizza = pizzaData;
+            IIngredient = ingredients;
         }
         public async Task<bool> Complete()
         {
