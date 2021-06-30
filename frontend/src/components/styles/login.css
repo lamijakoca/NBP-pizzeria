@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.loginDiv{
+    max-width: 40%;
+    max-height: 60%;
+    justify-self: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+}
+.formDiv{
+    max-width: 450px;
+}
+h2{
+    text-align: center;
+    justify-self: center;
+    margin:auto;
+}
+.submitButton{
+    left: 35%;
+    width: 150px;
+}
+.logo{
+    justify-self: center;
+    margin-left: 20%;
+}
+.regPlease{
+    opacity: 0.4;
+    text-align: center;
+    text-decoration: none;
+    align-self: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
