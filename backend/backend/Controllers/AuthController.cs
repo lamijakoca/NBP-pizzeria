@@ -22,9 +22,20 @@ namespace backend.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] AuthEmployee authEmployee)
         {
-            var token = await authData.Authenticate(authEmployee.Username, authEmployee.Password);
+            var token = await authData.AuthenticateEmployee(authEmployee.Username, authEmployee.Password);
 
             if(token != null)
+                return Ok($"Bearer {token}");
+            return Unauthorized("Unauthorized!");
+        }
+
+        [HttpPost]
+        [Route("login/customer")]
+        public async Task<IActionResult> LoginCustomer([FromBody] CustomerDTO customer)
+        {
+            var token = await authData.AuthenticateCustomer(customer.Username, customer.Password);
+
+            if (token != null)
                 return Ok($"Bearer {token}");
             return Unauthorized("Unauthorized!");
         }

@@ -7,6 +7,7 @@ namespace backend.Data.AuthRepo
 {
     public interface IAuthData
     {
-        public Task<string> Authenticate(string username, string password);
+        public Task<string> AuthenticateEmployee(string username, string password);
+        public Task<string> AuthenticateCustomer(string username, string password);
     }
 }
