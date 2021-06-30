@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -19,15 +19,13 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Route("/authenticate")]
+        [Route("login")]
         public async Task<IActionResult> Login([FromBody] AuthEmployee authEmployee)
         {
             var token = await authData.Authenticate(authEmployee.Username, authEmployee.Password);
 
             if(token != null)
-            {
                 return Ok($"Bearer {token}");
-            }
             return Unauthorized("Unauthorized!");
         }
     }

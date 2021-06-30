@@ -33,12 +33,12 @@ namespace backend.Data.AuthRepo
                     {
                         new Claim("Id", employee.Id.ToString()),
                         new Claim("Username", employee.Username),
-                        new Claim("Password", employee.Password),
                         new Claim("Type", employee.Type)
                     }),
                     Expires = DateTime.UtcNow.AddDays(7),
                     SigningCredentials = new SigningCredentials(
-                        new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+                        new SymmetricSecurityKey(tokenKey), 
+                        SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 return tokenHandler.WriteToken(token);
