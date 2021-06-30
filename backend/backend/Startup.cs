@@ -89,6 +89,8 @@ namespace backend
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowFromAll");
+
             app.UseRouting();
 
             app.UseAuthentication();
