@@ -3,7 +3,9 @@ using backend.Data.AuthRepo;
 using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
 using backend.Data.Ingredients;
+using backend.Data.PizzaActualRepo;
 using backend.Data.PizzaRepo;
+using backend.Data.StorageRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -76,6 +78,8 @@ namespace backend
             services.AddScoped<IPizzaData, MockPizzaData>();
             services.AddScoped<IIngredients, MockIngredientsData>();
             services.AddScoped<IAuthData, MockAuthData>();
+            services.AddScoped<IStorageData, MockStorageData>();
+            services.AddScoped<IPizzaActualData, MockPizzaActualData>();
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();
