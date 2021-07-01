@@ -15,6 +15,13 @@
 .formDiv{
     max-width: 450px;
 }
+.selectOption{
+    width: 93%;
+    height: 30px;
+    margin-left: 28px;
+    border-color: lightgray;
+    border-radius: 2px;
+}
 h2{
     text-align: center;
     justify-self: center;
