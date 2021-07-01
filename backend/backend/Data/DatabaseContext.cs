@@ -18,5 +18,6 @@ namespace backend.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Storage> Storages { get; set; }
     }
 }

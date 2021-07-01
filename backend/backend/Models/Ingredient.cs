@@ -9,6 +9,10 @@ namespace backend.Models
 {
     public class Ingredient
     {
+        public Ingredient()
+        {
+            this.Pizzas = new HashSet<Pizza>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
@@ -23,5 +27,7 @@ namespace backend.Models
 
         [Required]
         public float Price { get; set; }
+
+        public virtual ICollection<Pizza>Pizzas { get; set; }
     }
 }

@@ -9,12 +9,17 @@ namespace backend.Models
 {
     public class Pizza
     {
+        public Pizza()
+        {
+            this.Ingredients = new HashSet<Ingredient>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         public string Name { get; set; }
         public string Image { get; set; }
-
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }
