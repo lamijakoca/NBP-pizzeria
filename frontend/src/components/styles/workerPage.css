@@ -22,6 +22,14 @@ img{
     margin-left: auto;
     margin-right: auto;
 }
+.addPizza{
+    background-color: lightpink;
+    color: white;
+    width: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .footer{
     border: 2px solid lightcoral;
     border-left: none;

@@ -35,6 +35,9 @@ function Worker(){
     return(
         <div className="workerMain">
             <img src={logo} alt="Pizzeria"/>
+            <Button type="default" className="addPizza">
+                Add Pizza
+            </Button>
             {
                 pizza.map((p) => (
                     <div key={p.id}>
