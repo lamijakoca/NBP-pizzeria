@@ -16,3 +16,32 @@ img{
     margin-left: auto;
     margin-right: auto;
 }
+.cards{
+    max-width: 60%;
+    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.footer{
+    border: 2px solid lightcoral;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    width: 100%;
+    height: 40px;
+    top: auto;
+    bottom: -10;
+}
+.addToCart{
+    top: 2px;
+    float: right;
+    height: 35px;
+    
+}
+.selectSize{
+    margin-top: 2px;
+    width: auto;
+    height: 35px;
+    border-color: lightgrey;
+    border-radius: 2px;
+}
