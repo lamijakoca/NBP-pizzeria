@@ -16,22 +16,23 @@ function Login() {
 
   const onTypeChange = (event) => {
     setType(event.target.value);
-    console.log(type);
   };
 
   const loginSubmit = async () => {
     const User = { username, password };
     if (type === "employee") {
-      axios.post(`${backend}/api/auth/login`, User).then((res) => {
-        const { token } = res.data;
-        localStorage.setItem("token", token);
-        setIsLogin(true);
+      await axios.post(`${backend}/api/auth/login`, User)
+          .then((res) => {
+            const token = res.data;
+            localStorage.setItem("token", token);
+            setIsLogin(true);
       });
     } else if (type === "customer") {
-      axios.post(`${backend}/api/auth/login/customer`, User).then((res) => {
-        const { token } = res.data;
-        localStorage.setItem("token", token);
-        setIsLogin(true);
+      await axios.post(`${backend}/api/auth/login/customer`, User)
+            .then((res) => {
+            const token = res.data;
+            localStorage.setItem("token", token);
+            setIsLogin(true);
       });
     }
   };
