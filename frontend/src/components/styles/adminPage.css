@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    overflow-y: scroll;
 }
 
 .mainAdmin{
@@ -47,4 +48,23 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+}
+
+.nurliTabela{
+    width: 70%;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ingredientH2, .pizzaH2{
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+.tablePizzas{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
 }
