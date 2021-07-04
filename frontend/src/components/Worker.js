@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../assets/logo.png';
+import * as images from '../assets/assetsJS'
 import {useHistory} from 'react-router-dom';
+import logo from '../assets/logo.png';
+import { Card, Button } from 'antd';
 import "./styles/workerPage.css";
-import axios from 'axios';
 import database from '../utils';
-import {Card, Button} from 'antd';
+import axios from 'axios';
 
 function Worker(){
     const history = useHistory();
-    
+
     const [size, setSize] = useState("Medium");
     const [pizza, setPizza] = useState([]);
     const [token, setToken] = useState("");
@@ -36,14 +37,19 @@ function Worker(){
     return(
         <div className="workerMain">
             <img src={logo} alt="Pizzeria"/>
-            <Button type="default" className="addPizza" onClick={() => {history.push('/new')}}>
+            <Button 
+            type="default" 
+            className="addPizza" 
+            onClick={() => history.push('/new')}
+            >
                 Add Pizza
             </Button>
             {
                 pizza.map((p) => (
                     <div key={p.id}>
                         <Card title={p.name} className="cards">
-                            <p>Image</p>
+                            <img className="pizzaImg" src={images[p.image]} alt="Pizza"/>
+                            {/* {console.log(p.image)} */}
                             <p>Ingredients</p>
                             <div className="footer">
                                 <select onChange={handleChange} className="selectSize">
