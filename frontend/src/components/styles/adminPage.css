@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.mainAdmin{
+    max-width: 70%;
+    max-height: auto;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+.ingredients{
+    background-color: lightpink;
+    color: white;
+    height: 35px;
+    border-color: lightpink;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+.pizzas{
+    background-color: lightskyblue;
+    color: white;
+    height: 35px;
+    border-color: lightskyblue;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.turnover{
+    background-color: lightgray;
+    color: white;
+    border-color: lightgray;
+    cursor: pointer;
+    height: 35px;
+    border-radius: 2px;
+    width: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
