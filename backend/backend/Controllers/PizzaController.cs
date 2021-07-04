@@ -5,6 +5,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace backend.Controllers
@@ -47,7 +48,9 @@ namespace backend.Controllers
         {
             if (ModelState.IsValid)
             {
+                //int IngredientId = Int32.Parse(User.FindFirst(""))
                 var added = mapper.Map<Pizza>(pizzaDTO);
+                
 
                 await unitOfWork.IPizza.AddPizza(added);
                 await unitOfWork.Complete();
