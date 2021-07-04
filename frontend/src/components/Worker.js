@@ -8,6 +8,7 @@ import {Card, Button} from 'antd';
 
 function Worker(){
     const history = useHistory();
+    
     const [size, setSize] = useState("Medium");
     const [pizza, setPizza] = useState([]);
     const [token, setToken] = useState("");
@@ -35,7 +36,7 @@ function Worker(){
     return(
         <div className="workerMain">
             <img src={logo} alt="Pizzeria"/>
-            <Button type="default" className="addPizza">
+            <Button type="default" className="addPizza" onClick={() => {history.push('/new')}}>
                 Add Pizza
             </Button>
             {
