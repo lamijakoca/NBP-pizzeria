@@ -1,8 +1,97 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import * as images from '../assets/assetsJS'
+import {useHistory} from 'react-router-dom';
+import logo from '../assets/logo.png';
+import { Card, Button } from 'antd';
+import "./styles/customerPage.css";
+import database from '../utils';
+import axios from 'axios';
 
 function Customer(){
+    const history = useHistory();
+
+    const [size, setSize] = useState("");
+    const [price, setPrice] = useState();
+    const [pizza, setPizza] = useState([]);
+    const [id, setId] = useState(10);
+    const [pizzaActual, setPizzaActual] = useState();
+    const [token, setToken] = useState("");
+
+    const getPizzas = async(token) => {
+        const res = await axios.get(`${database}/api/pizza`, {
+            headers: {"Authorization": token}
+        })
+        setPizza(res.data);
+    }
+
+    const handleChange = (value) =>{
+        setSize(value);
+        console.log(size);
+    }
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setToken(token);
+        if(token){
+            getPizzas(token);
+        }
+    }, [])
+
+    const addToCart = async(token) =>{
+        const pizzaActuals = {id, size, price}
+        await axios.post(`${database}/api/pizzaActual`, pizzaActuals,{
+            headers: {"Authorization" : token}
+        })
+        .then((res) => {
+            setPizzaActual(res.data);
+        })  
+    }
+
+    
     return(
-        <p>Customer Page</p>
+        <div className="customerMain">
+            <img src={logo} alt="Pizzeria"/>
+            {
+                pizza.map((p) => (
+                    <div key={p.id}>
+                        <Card title={p.name} className="cards">
+                            <img className="pizzaImg" src={images[p.image]} alt="Pizza"/>
+                            {/* {console.log(p.image)} */}
+                            <p style={{marginLeft:"83%", fontWeight:"bold"}}>Ingredients</p>
+                            <ul title="Ingredients">
+                                <li>meso</li>
+                                <li>paradajz sos</li>
+                                <li>trapist</li>
+                                <li>origano</li>
+                            </ul>
+                            <div className="footer">
+                                <select onChange={(event) => {
+                                    setSize(event.target.value)
+                                    if(size === "small"){
+                                        setPrice(250);
+                                    }
+                                    else if (size === "medium"){
+                                        setPrice(300);
+                                    }
+                                    else setPrice(350);
+                                }} 
+                                    className="selectSize">
+                                    <option value="small">Small</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="big">Big</option>
+                                </select>
+                                <Button 
+                                type="default" 
+                                className="addToCart"
+                                onClick={() => {addToCart(token)}}>
+                                    Add to Cart
+                                </Button>
+                            </div>
+                        </Card>
+                    </div>
+                ))
+            }
+        </div>
     )
 }
 
