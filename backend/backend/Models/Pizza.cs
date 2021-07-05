@@ -20,7 +20,8 @@ namespace backend.Models
 
         public string Name { get; set; }
         public string Image { get; set; }
+
+        public virtual CustomerPizzaActuals PizzaActual { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
-        public virtual PizzaActual PizzaActual { get; set; }
     }
 }

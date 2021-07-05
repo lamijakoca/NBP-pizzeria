@@ -8,11 +8,10 @@ namespace backend.Data.PizzaActualRepo
 {
     public interface IPizzaActualData
     {
-        public Task<List<PizzaActual>> GetPizzaActuals();
-
-        public Task<PizzaActual> GetPizzaActual(long Id);
-        public Task<bool> AddPizzaActual(PizzaActual pizzaActual);
-        public bool DeletePizzaActual(PizzaActual pizzaActual);
-        public bool EditPizzaActual (PizzaActual pizzaActual);
+        public Task<List<CustomerPizzaActuals>> GetPizzaActuals();
+        public Task<CustomerPizzaActuals> GetPizzaActual(long id);
+        public Task<bool> AddPizzaActual(CustomerPizzaActuals customerPizzaActuals);
+        public bool DeletePizzaActual(CustomerPizzaActuals customerPizzaActualst);
+        public bool EditPizzaActual(CustomerPizzaActuals customerPizzaActuals);
     }
 }

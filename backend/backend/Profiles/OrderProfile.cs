@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace backend.Profiles
 {
-    public class PizzaActualProfile : Profile
+    public class OrderProfile : Profile
     {
-        public PizzaActualProfile()
+        public OrderProfile()
         {
-            CreateMap<CustomerPizzaActuals, PizzaActualDTO>().ReverseMap();
+            CreateMap<Orders, AddOrder>().ReverseMap();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace backend.DTO
 {
-    public class PizzaActualDTO
+    public class AddOrder
     {
         public string Size { get; set; }
         public int Price { get; set; }

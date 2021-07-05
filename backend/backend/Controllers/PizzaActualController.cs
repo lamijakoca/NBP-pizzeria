@@ -27,30 +27,28 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var pizzas = await unitOfWork.IPizzaActual.GetPizzaActuals();
+            var pizzas = await unitOfWork.IPizzaActualData.GetPizzaActuals();
             return Ok(pizzas);
         }
-
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById([FromRoute] long id)
         {
-            var pizza = await unitOfWork.IPizzaActual.GetPizzaActual(id);
+            var pizza = await unitOfWork.IPizzaActualData.GetPizzaActual(id);
             if (pizza == null)
             {
                 return NotFound($"Pizza with id: {id} not found.");
             }
             return Ok(pizza);
         }
-
         [HttpPost]
         public async Task<IActionResult> AddPizza([FromBody] PizzaActualDTO pizzaActualDTO)
         {
             if (ModelState.IsValid)
             {
-                var added = mapper.Map<PizzaActual>(pizzaActualDTO);
+                var added = mapper.Map<CustomerPizzaActuals>(pizzaActualDTO);
 
-                await unitOfWork.IPizzaActual.AddPizzaActual(added);
+                await unitOfWork.IPizzaActualData.AddPizzaActual(added);
                 await unitOfWork.Complete();
 
                 return Ok(added);
@@ -58,39 +56,38 @@ namespace backend.Controllers
 
             return BadRequest("Invalid info");
         }
-
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteById([FromRoute] long id)
         {
-            var thisOne = await unitOfWork.IPizzaActual.GetPizzaActual(id);
+            var thisOne = await unitOfWork.IPizzaActualData.GetPizzaActual(id);
             if (thisOne == null)
             {
                 return NotFound($"Pizza with id {id} not found");
             }
-            unitOfWork.IPizzaActual.DeletePizzaActual(thisOne);
+            unitOfWork.IPizzaActualData.DeletePizzaActual(thisOne);
             await unitOfWork.Complete();
 
             return Ok("Successfully deleted!");
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute] long id, [FromBody] PizzaActualDTO pizzaActualDTO)
-        {
-            if (!ModelState.IsValid)
+            [HttpPut]
+            [Route("{id}")]
+            public async Task<IActionResult> Update([FromRoute] long id, [FromBody] PizzaActualDTO pizzaActualDTO)
             {
-                return BadRequest("Invalid info");
-            }
-            var oldOne = await unitOfWork.IPizzaActual.GetPizzaActual(id);
-            if (oldOne == null)
-            {
-                return NotFound($"Not found pizza with id {id}");
-            }
-            mapper.Map<PizzaActualDTO, PizzaActual>(pizzaActualDTO, oldOne);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid info");
+                }
+                var oldOne = await unitOfWork.IPizzaActualData.GetPizzaActual(id);
+                if (oldOne == null)
+                {
+                    return NotFound($"Not found pizza with id {id}");
+                }
+                mapper.Map<PizzaActualDTO, CustomerPizzaActuals>(pizzaActualDTO, oldOne);
 
-            await unitOfWork.Complete();
-            return Ok("Successfully updated!");
-        }
+                await unitOfWork.Complete();
+                return Ok("Successfully updated!");
+            }
     }
 }

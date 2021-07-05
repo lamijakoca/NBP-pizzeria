@@ -1,6 +1,7 @@
 ﻿using backend.Data.AuthRepo;
 using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
+using backend.Data.HelpRepo;
 using backend.Data.Ingredients;
 using backend.Data.PizzaActualRepo;
 using backend.Data.PizzaRepo;
@@ -20,7 +21,8 @@ namespace backend.Data
         public IIngredients IIngredient { get; set; }
         public IAuthData IAuth { get; set; }
         public IStorageData IStorageData { get; set; }
-        public IPizzaActualData IPizzaActual { get; set; }
+        public IPizzaActualData IPizzaActualData { get; set; }
+        public IOrders IOrders { get; set; }
         Task<bool> Complete();
     }
 }

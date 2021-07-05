@@ -10,8 +10,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210701142216_Pizza-PizzaActual")]
-    partial class PizzaPizzaActual
+    [Migration("20210705233045_HelpForOrderMigration")]
+    partial class HelpForOrderMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,30 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("backend.Models.CustomerPizzaActuals", b =>
+                {
+                    b.Property<long>("PizzaActualId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("PizzaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PizzaActualId");
+
+                    b.HasIndex("PizzaId")
+                        .IsUnique();
+
+                    b.ToTable("PizzaActuals");
                 });
 
             modelBuilder.Entity("backend.Models.Employee", b =>
@@ -122,6 +146,27 @@ namespace backend.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("backend.Models.Orders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DOP")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("backend.Models.Pizza", b =>
                 {
                     b.Property<long>("Id")
@@ -138,23 +183,6 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pizzas");
-                });
-
-            modelBuilder.Entity("backend.Models.PizzaActual", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PizzaActual");
                 });
 
             modelBuilder.Entity("backend.Models.Storage", b =>
@@ -192,22 +220,22 @@ namespace backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("backend.Models.CustomerPizzaActuals", b =>
+                {
+                    b.HasOne("backend.Models.Pizza", "Pizza")
+                        .WithOne("PizzaActual")
+                        .HasForeignKey("backend.Models.CustomerPizzaActuals", "PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pizza");
+                });
+
             modelBuilder.Entity("backend.Models.Ingredient", b =>
                 {
                     b.HasOne("backend.Models.Storage", null)
                         .WithMany("Ingredients")
                         .HasForeignKey("StorageId");
-                });
-
-            modelBuilder.Entity("backend.Models.PizzaActual", b =>
-                {
-                    b.HasOne("backend.Models.Pizza", "Pizza")
-                        .WithOne("PizzaActual")
-                        .HasForeignKey("backend.Models.PizzaActual", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pizza");
                 });
 
             modelBuilder.Entity("backend.Models.Storage", b =>

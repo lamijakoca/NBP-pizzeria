@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    public class PizzaActual
+    public class Orders
     {
         [Key]
-        [ForeignKey("Pizza")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
-        public int Size { get; set; }
+        public int Id { get; set; }
+
+        public string Size { get; set; }
         public int Price { get; set; }
-        public virtual Pizza Pizza { get; set; }
+        public DateTime DOP { get; set; }
     }
 }

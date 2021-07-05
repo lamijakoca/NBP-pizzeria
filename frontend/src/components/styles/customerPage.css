@@ -3,7 +3,7 @@
     margin: 0;
     overflow-y: auto;
 }
-.workerMain{
+.customerMain{
     max-width: 70%;
     max-height: auto;
     justify-self: center;
@@ -61,11 +61,4 @@ img{
     border-radius: 3px;
     float: left;
     margin-bottom: 10px;
-}
-ul{
-    float: right;
-}
-
-.deleteBtn{
-    margin-top: 6px;
 }

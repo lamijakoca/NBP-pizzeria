@@ -2,6 +2,7 @@ using backend.Data;
 using backend.Data.AuthRepo;
 using backend.Data.CustomerRepo;
 using backend.Data.EmployeeRepo;
+using backend.Data.HelpRepo;
 using backend.Data.Ingredients;
 using backend.Data.PizzaActualRepo;
 using backend.Data.PizzaRepo;
@@ -80,6 +81,7 @@ namespace backend
             services.AddScoped<IAuthData, MockAuthData>();
             services.AddScoped<IStorageData, MockStorageData>();
             services.AddScoped<IPizzaActualData, MockPizzaActualData>();
+            services.AddScoped<IOrders, MockOrders>(); 
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();
