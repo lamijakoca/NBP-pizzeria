@@ -1,12 +1,11 @@
 import capricciosa from './capricciosa.jpg'
 import fungi from './fungi.jpg'
+import carbonara from './carbonara.jpg'
+import margarita from './margarita.jpg'
 
 export{
     capricciosa,
     fungi,
+    carbonara,
+    margarita
 }
-
-// export const capricciosa = require("./capricciosa.jpg");
-// export const carbonara = require("./carbonara.jpg");
-// export const fungi = require("./fungi.jpg");
-// export const margarita = require("./margarita.jpg");
