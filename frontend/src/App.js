@@ -7,6 +7,7 @@ import Customer from './components/Customer';
 import Home from './components/Home';
 import Ingredients from './components/Ingredients';
 import Login from './components/Login';
+import Orders from './components/Orders';
 import Worker from './components/Worker';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/new" component={AddPizza}/>
           <Route path="/ingredients" component={Ingredients}/>
           <Route path="/admin-pizzas" component={AdminPizzas}/>
+          <Route path="/orders" component={Orders}/>
       </Router>      
     </div>
   )
