@@ -54,14 +54,6 @@ function AdminPizzas(){
         <div className="divAdminovihPica">
             <img src={logo} alt="Pizzeria"/>
             <h2 className="pizzaH2">You can manage with pizzas here</h2>
-            <Table
-                rowKey="id"
-                className="tablePizzas"
-                columns={columns}
-                dataSource={pizzas}
-                pagination={{ pageSize: 6 }}>
-
-            </Table>
             <Input
             value={id}
             onChange={select}
@@ -71,11 +63,21 @@ function AdminPizzas(){
             
             <Button 
             className="deletePizza"
+            style={{display:"block", margin: "auto", top: "2px"}}
+            type="default"
             htmlType="submit"
             onClick={() => {deletePizza(id)}}
             >
                 Delete
             </Button>
+            <Table
+                rowKey="id"
+                className="tablePizzas"
+                columns={columns}
+                dataSource={pizzas}
+                pagination={{ pageSize: 6 }}>
+
+            </Table>
         </div>
     )
 }
