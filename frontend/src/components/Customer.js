@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as images from '../assets/assetsJS'
 import {useHistory} from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { Card, Button } from 'antd';
+import { Card, Button, message } from 'antd';
 import "./styles/customerPage.css";
 import database from '../utils';
 import axios from 'axios';
@@ -12,10 +12,15 @@ function Customer(){
 
     const [size, setSize] = useState("");
     const [price, setPrice] = useState();
+    const [date, setDate] = useState();
     const [pizza, setPizza] = useState([]);
     const [id, setId] = useState(10);
     const [pizzaActual, setPizzaActual] = useState();
     const [token, setToken] = useState("");
+
+    var today = new Date(),
+    todayDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
 
     const getPizzas = async(token) => {
         const res = await axios.get(`${database}/api/pizza`, {
@@ -38,12 +43,14 @@ function Customer(){
     }, [])
 
     const addToCart = async(token) =>{
-        const pizzaActuals = {id, size, price}
-        await axios.post(`${database}/api/pizzaActual`, pizzaActuals,{
+        const pizzaActuals = {size, price, date}
+        console.log(size, price, date);
+        await axios.post(`${database}/api/orders`, pizzaActuals,{
             headers: {"Authorization" : token}
         })
         .then((res) => {
             setPizzaActual(res.data);
+            message.success("Porudzbina uspesno izvrsena!");
         })  
     }
 
@@ -56,7 +63,6 @@ function Customer(){
                     <div key={p.id}>
                         <Card title={p.name} className="cards">
                             <img className="pizzaImg" src={images[p.image]} alt="Pizza"/>
-                            {/* {console.log(p.image)} */}
                             <p style={{marginLeft:"83%", fontWeight:"bold"}}>Ingredients</p>
                             <ul title="Ingredients">
                                 <li>meso</li>
@@ -74,7 +80,7 @@ function Customer(){
                                         setPrice(300);
                                     }
                                     else setPrice(350);
-                                }} 
+                                    }} 
                                     className="selectSize">
                                     <option value="small">Small</option>
                                     <option value="medium">Medium</option>
@@ -83,7 +89,10 @@ function Customer(){
                                 <Button 
                                 type="default" 
                                 className="addToCart"
-                                onClick={() => {addToCart(token)}}>
+                                onClick={() => {
+                                    setDate(todayDate);
+                                    addToCart(token)
+                                    }}>
                                     Add to Cart
                                 </Button>
                             </div>
