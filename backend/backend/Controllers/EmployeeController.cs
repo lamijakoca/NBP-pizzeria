@@ -6,6 +6,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +19,28 @@ namespace backend.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        public readonly DatabaseContext context;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public EmployeeController(IUnitOfWork unitOfWork , IMapper mapper)
+        public EmployeeController(DatabaseContext database, IUnitOfWork unitOfWork , IMapper mapper)
         {
+            context = database;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task <IActionResult> GetAllEmployees()
+        public async Task <IActionResult> GetAllEmployees([FromQuery] PaginatedList filter)
         {
-            var employees = await _unitOfWork.IEmployee.GetEmployees();
-
-            return Ok(employees);
+            var validFilter = new PaginatedList(filter.PageNumber, filter.PageSize);
+            var pagedData = await context.Employees
+                                        .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                        .Take(validFilter.PageSize)
+                                        .ToListAsync();
+            var totalRecords = await context.Employees.CountAsync();
+            return Ok(new PagedResponse<List<Employee>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
+            //var employees = await _unitOfWork.IEmployee.GetEmployees();
+            //return Ok(employees);
         }
 
         [HttpGet]

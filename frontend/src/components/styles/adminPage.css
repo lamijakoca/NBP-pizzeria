@@ -68,15 +68,15 @@
     margin-right: auto;
     margin-top: 15px;
 }
-.deletePizza{
-    float: right;
-    margin-right: 30%;
-    top: 5px;
-}
+/* .deletePizza{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+} */
 .deleteById{
-    float: left;
-    left: 27%;
-    top: 5px;
+    display: block;
+    margin: auto;
 }
 .divAdminovihPica{
     height: fit-content;
