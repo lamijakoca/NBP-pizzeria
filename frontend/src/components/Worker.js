@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import { DeleteOutlined } from '@ant-design/icons'
+import { Card, Button, message } from 'antd'
 import * as images from '../assets/assetsJS'
-import {useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom'
 import logo from '../assets/logo.png';
-import { Card, Button, message } from 'antd';
-import {DeleteOutlined} from '@ant-design/icons';
 import "./styles/workerPage.css";
 import database from '../utils';
 import axios from 'axios';
@@ -48,6 +48,13 @@ function Worker(){
             onClick={() => history.push('/new')}
             >
                 Add Pizza
+            </Button>
+            <Button 
+            type="default"
+            className="checkOrders"
+            onClick={()=> {history.push('/orders')}}
+            >
+                Check Orders
             </Button>
             {
                 pizza.map((p) => (
